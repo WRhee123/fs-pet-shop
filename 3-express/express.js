@@ -16,10 +16,14 @@ app.get('/pets', (req, res) => {
         if(err) {
             //err.stack shows execution path that led to the error
             console.error(err.stack);
+            //.status will set the HTTP status code of the response to 500
+            //.json is a method provided by Express.js for sending a JSON response. It automatically sets the "Content-Type" header to "application/json"
+            //{error: "Internal Server Error"} is a JavaScript object that contains the error message. This object will be converted to a JSON string before being sent in the response.
+            //You are creating a JSON object with a single property "error" and setting it's value to the string "Internal Server Error"
             res.status(500).json({error: "Internal Server Error"})
             return;
         }
-        //if there are no errors parse the JSON content in petsJSON to a javascript object
+        //if there are no errors, parse the JSON content in petsJSON to a javascript object
         //we need to use JSON.parse because our petsJSON is a string more specifically a JSON string.
         //to work with this data petsJSON we need to convert it to a JavaScript object
         //once it is parsed the object can be manipulated and accessed 
@@ -61,3 +65,5 @@ app.get("/pets/:index", (req,res) => {
 app.listen(3000, function() {
     console.log("server is running")
 })
+
+
